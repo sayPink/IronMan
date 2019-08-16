@@ -1,0 +1,89 @@
+.main {
+    height: 100%;
+    position: relative;
+
+    .music-container {
+        color: #fff;
+        font-size: 12px;
+        font-family: "\5B8B\4F53";
+        position: absolute;
+        bottom: 20px;
+        line-height: 60px;
+        right: 280px;
+        display: flex;
+        border-radius: 8px;
+        background: rgba(0, 0, 0, .3);
+        padding: 0 20px;
+        opacity: .7;
+        transition: all .2s;
+
+        .music-info {
+            padding-right: 20px;
+        }
+
+    }
+
+    .ctrl-tools .antIcon-icon:hover,
+    .music-container:hover {
+        opacity: 1;
+        background: rgba(0, 0, 0, .4);
+    }
+
+    .ctrl-tools {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        color: #fff;
+        padding: 20px;
+        padding-left: 20px;
+        padding-left: 0;
+        display: flex;
+
+        .antIcon-icon {
+            position: relative;
+            display: block;
+            width: 60px;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+            font-size: 28px;
+            margin-left: 5px;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, .3);
+            opacity: .7;
+            transition: opacity .2s;
+            cursor: pointer;
+        }
+
+        .volume-container {
+            display: flex;
+            justify-content: center;
+            flex-direction: column-reverse;
+            align-items: center;
+            width: 60px;
+            position: absolute;
+            bottom: 85px;
+            right: 20px;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, .3);
+            opacity: .7;
+            transition: all .2s;
+            cursor: pointer;
+
+            span {
+                font-size: 12px;
+                line-height: 30px;
+            }
+
+            .ant-slider-vertical {
+                display: none;
+                height: 100px;
+                margin-top: 20px;
+            }
+        }
+
+        .volume-container:hover .ant-slider-vertical {
+            display: block;
+        }
+    }
+}
