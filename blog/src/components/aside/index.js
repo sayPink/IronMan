@@ -122,7 +122,7 @@ class Aside extends Component {
               </div>
               <div className='time'>{new Date().toLocaleTimeString()}</div>
             </div>
-            <a href='https://github.com/sayPink'><Icon type='github'/>&nbsp;461377096@qq.com </a>
+            <a href='https://github.com/sayPink/IronMan'><Icon type='github'/>&nbsp;461377096@qq.com </a>
           </div>
           ):(
             !this.state.tooShort && 

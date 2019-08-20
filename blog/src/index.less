@@ -1,0 +1,115 @@
+@import './utils/icon/iconfont.css';
+
+body {
+  min-width: 1200px !important;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// code {
+//   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+//     monospace;
+// }
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 3px;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+::-webkit-scrollbar-thumb {
+  height: 10px;
+  background-color: #535353;
+  background-clip: padding-box;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {}
+
+
+/*   静音after  */
+.aside .aside-music .antIconsound::after,
+.ctrl-tools .antIconsound::after {
+  content: "";
+  position: absolute;
+  width: 35px;
+  height: 3px;
+  background: #fff;
+  top: 50%;
+  left: 50%;
+  border-radius: 10px;
+  transform: translate(-50%, -50%) rotate(-30deg);
+  opacity: 0;
+}
+
+.aside .aside-music .disabled::after,
+.ctrl-tools .disabled::after {
+  opacity: 1;
+}
+
+
+.detail-content {
+  font-size: 14px;
+  h2,
+  h4,
+  h3,
+  p,
+  pre {
+    margin-bottom: 10px;
+  }
+
+  code {
+    border-radius: 3px;
+    font-size: 12px;
+    font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+  }
+
+  p code,
+  li code {
+    background-color: #fff5f5;
+    color: #ff502c;
+    font-size: .87em;
+    padding: .065em .4em;
+  }
+
+  blockquote {
+    color: #666;
+    padding: 1px 23px;
+    margin: 22px 0;
+    border-left: 4px solid #cbcbcb;
+    background-color: #f8f8f8;
+
+    p {
+      margin: 10px 0;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: #409EFF;
+    transition: color .2s;
+
+    &:hover {
+      color: rgba(#409EFF, .8);
+    }
+  }
+
+  pre {
+    line-height: 1.2em;
+  }
+
+  p {
+    line-height: 1.5em;
+    margin: 10px 0;
+
+    img {
+      max-width: 100%;
+      display: inline-block;
+      margin: 0 auto;
+    }
+  }
+}

@@ -19,7 +19,7 @@
             cursor: pointer;
             position: relative;
             transition: all .2s;
-
+            
             label {
                 width: 18px;
                 font-size: 18px;
@@ -118,6 +118,18 @@
                 padding-right: 20px;
                 flex-grow: 0;
                 position: relative;
+
+                .is-top {
+                  display: block;
+                  position: absolute;
+                  width: 12px;
+                  height: 12px;
+                  top: 10px;
+                  left: 10px;
+                  border-radius: 50%;
+                  background: #409eff;
+                  box-shadow: 0 0 5px rgba(#000, 0.2) inset, 0 0 10px rgba(#fff, 0.3);
+                }
 
                 a {
                     display: block;

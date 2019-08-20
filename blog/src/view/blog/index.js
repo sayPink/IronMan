@@ -92,7 +92,9 @@ class Blog extends Component {
           { opacity: [1, 0], translateY: [0, -50] }
         ]}>
         <div key='a'>
-          <span></span>
+          {
+            item.is_top ? <span className='is-top' title="这篇博客已被置顶"></span> : ''
+          }
           <NavLink to={`/blog/detail/${item.id}`} title={item.title}>
             <img src={item.cover_path} alt='封面图片'/>
             <div className='item-info'>

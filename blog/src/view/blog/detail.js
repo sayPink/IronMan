@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {  Skeleton, Spin, Icon, notification, BackTop } from 'antd';
+import {  Skeleton, Spin, Icon, notification } from 'antd';
 import { collapsed, handleMusicPlay, actionsMusicPlay } from '../../actions/music';
 import { handleMusicPlayOrStop, handleMusicDetailPlat } from '../../utils/music'
 import { getBlogDetail, getBlogLike, getBlogHits } from '../../api/blog';
@@ -8,7 +8,7 @@ import { dataFormat } from '../../utils/index'
 import Error from '../../components/error'
 import './detail.less'
 import Highlight from 'react-highlight'
-import 'highlight.js/styles/atom-one-dark.css';
+import 'highlight.js/styles/atom-one-dark.css'
 
 class Detail extends Component {
 
@@ -111,12 +111,11 @@ class Detail extends Component {
                   return <React.Fragment key={item.id}>
                     <h3 className='title'>{item.title}</h3>
                     <div className='info'>编辑时间：{dataFormat(item.update_time)}</div>
-                    <Highlight className='detail-content' innerHTML={true} children={item.html}></Highlight>
+                    <Highlight className='detail-content' innerHTML={true}>{item.html}</Highlight>
                     <div className='float-tools'>
                       {
                         topBtnShow && <div className='btn-item btn-top' onClick={ this.handleClickTop.bind(this) } title='返回顶部'><i className='antIcon-icon antIconback-top'></i></div>
                       }
-                      <BackTop><div className="ant-back-top-inner">UP</div></BackTop>
                       <div className='btn-item btn-like' onClick={this.handleSubmitLike.bind(this)} title='点赞'>
                         {
                           submitLike ? <i className='antIcon-icon antIconlike'></i>:<Icon type="loading-3-quarters" spin />
