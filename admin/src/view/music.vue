@@ -66,7 +66,7 @@
           <el-row :gutter="20">
             <el-col :span="12">
               <el-form-item label="上传音乐" prop="song_url" label-width="6em">
-                <el-upload class="upload-demo" action="http://127.0.0.1:3006/api/upload?flag=mp3"
+                <el-upload class="upload-demo" :action="`${baseURL}/api/upload?flag=mp3`"
                   :limit="1"
                   :file-list="musicFileList"
                   :on-success="handleMusicSuccess" 
@@ -79,7 +79,7 @@
             </el-col>
             <el-col :span="12">
               <el-form-item label="上传图片" prop="bg_url" label-width="6em">
-                <el-upload class="upload-demo" action="http://127.0.0.1:3006/api/upload?flag=picture" 
+                <el-upload class="upload-demo" :action="`${baseURL}/api/upload?flag=picture`"
                   :limit="1"
                   :file-list="bgFileList"
                   :on-success="handleAvatarSuccess" 
@@ -111,6 +111,7 @@
 <script>
 import pageing from "@/components/pageing"
 import { getMusicList, deleteMusic, addMusic, editMusic } from "@/api/blog"
+import { baseURL } from '@/config'
 export default {
   components: {
     pageing
@@ -120,6 +121,7 @@ export default {
       totalCount: 1,
       currentPage: 1,
       PageSize: 12,
+      baseURL: baseURL,
       musicList: '',
       musicDetaill: {
         song_name: '',
@@ -175,6 +177,7 @@ export default {
 
   created(){
     this.handleMuiscList()
+    console.log(baseURL)
   },
 
   methods:{
@@ -292,6 +295,8 @@ export default {
     handleSubmitMusic(musicDetaill){
       this.$refs[musicDetaill].validate(async(valid) => {
         if(!valid) return console.log('error submit!!');
+        // console.log(this.musicDetaill)
+        // return
         let result
         if(this.musicDetaill.id){
           result = await editMusic(this.musicDetaill)

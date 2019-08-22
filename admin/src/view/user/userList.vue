@@ -43,7 +43,7 @@
           </el-form-item>
 
           <el-form-item label="会员头像">
-            <el-upload class="avatar-uploader" action="http://127.0.0.1:3006/api/upload?flag=picture" 
+            <el-upload class="avatar-uploader" :action="`${baseURL}/api/upload?flag=picture`" 
               :show-file-list="false" 
               :on-success="handleAvatarSuccess" 
               :before-upload="beforeAvatarUpload">
@@ -71,6 +71,7 @@ import { getUserAll, editUserInfo, deleteUserInfoAll } from "@/api/user";
 import { validateNnickname, validatePhone } from "@/lib/util";
 import pageing from "@/components/pageing";
 import tableItem from "@/components/tableItem";
+import { baseURL } from '@/config'
 export default {
   name: "memberList",
   components: {
@@ -166,7 +167,7 @@ export default {
           label: "更新时间"
         }
       ],
-
+      baseURL: baseURL,
       searchInput: '',
       // 表格总数据
       tableData: [],
