@@ -72,6 +72,7 @@ import { validateNnickname, validatePhone } from "@/lib/util";
 import pageing from "@/components/pageing";
 import tableItem from "@/components/tableItem";
 import { baseURL } from '@/config'
+import { dataFormat } from "@/lib/util"
 export default {
   name: "memberList",
   components: {
@@ -167,6 +168,7 @@ export default {
           label: "更新时间"
         }
       ],
+      dataFormat: dataFormat,
       baseURL: baseURL,
       searchInput: '',
       // 表格总数据
@@ -290,7 +292,9 @@ export default {
         this.tableData = res.data.data;
         this.tableData.forEach(item => {
           item.sex_id = item.sex_id == 1 ? "男" : "女"
-          item.status = item.status == 1 ? "启用" : "禁用"
+          item.status = item.status == 1 ? "启用" : "禁用",
+          item.update_time = dataFormat(item.update_time),
+          item.create_time = dataFormat(item.create_time)
         })
         this.totalCount = res.data.total;
       }).catch(e => {
