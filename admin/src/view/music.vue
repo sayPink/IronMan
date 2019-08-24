@@ -24,7 +24,7 @@
             <i class="el-icon-bell">{{item.like}}</i>
           </span>
           <span>
-            <i class="el-icon-setting" @click="handleMuiscEdit(index)"></i>
+            <i class="el-icon-setting" @click="handleMuiscEdit(item.id)"></i>
             <i class="el-icon-delete" @click="handleDelete(item.id)"></i>
           </span>
           </div>
@@ -40,17 +40,17 @@
     <el-dialog title="添加音乐" :visible.sync="isDialog" @close="handelCloseDialog" width="45%">
 
       <div class="block dialog-wrepper">
-        <el-form ref="musicDetaill" :model="musicDetaill" :rules="rulesMusic">
+        <el-form ref="musicDetail" :model="musicDetail" :rules="rulesMusic">
 
           <el-row :gutter="15">
             <el-col :span="12">
               <el-form-item label="音乐名称" prop="song_name" label-width="6em">
-                <el-input v-model="musicDetaill.song_name" autocomplete="off"></el-input>
+                <el-input v-model="musicDetail.song_name" autocomplete="off"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="12">
               <el-form-item label="图片来源" prop="source" label-width="6em">
-                <el-input v-model="musicDetaill.source" autocomplete="off"></el-input>
+                <el-input v-model="musicDetail.source" autocomplete="off"></el-input>
               </el-form-item>
             </el-col>
           </el-row> 
@@ -58,7 +58,7 @@
           <el-row :gutter="20">
             <el-col :span="12">
               <el-form-item label="作者名称" prop="singer" label-width="6em">
-                <el-input v-model="musicDetaill.singer" autocomplete="off"></el-input>
+                <el-input v-model="musicDetail.singer" autocomplete="off"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="12"></el-col>
@@ -93,7 +93,7 @@
           </el-row>
 
           <el-form-item label="音乐描述" label-width="6em">
-            <el-input type="textarea" v-model="musicDetaill.describe" autosize></el-input>
+            <el-input type="textarea" v-model="musicDetail.describe" autosize></el-input>
           </el-form-item>
             
         </el-form>
@@ -101,7 +101,7 @@
 
       <span slot="footer" class="dialog-footer">
         <el-button size="mini" @click="isDialog=false">取 消</el-button>
-        <el-button type="primary" size="mini" @click="handleSubmitMusic('musicDetaill')">确 定</el-button>
+        <el-button type="primary" size="mini" @click="handleSubmitMusic('musicDetail')">确 定</el-button>
       </span>
 
     </el-dialog>
@@ -110,7 +110,7 @@
 
 <script>
 import pageing from "@/components/pageing"
-import { getMusicList, deleteMusic, addMusic, editMusic } from "@/api/blog"
+import { getMusicList, deleteMusic, addMusic, editMusic, getMusicDetail } from "@/api/blog"
 import { baseURL } from '@/config'
 export default {
   components: {
@@ -123,7 +123,7 @@ export default {
       PageSize: 12,
       baseURL: baseURL,
       musicList: '',
-      musicDetaill: {
+      musicDetail: {
         song_name: '',
         source: '',
         singer: '',
@@ -155,7 +155,7 @@ export default {
 
   computed: {
     bgFileList() {
-      let { bg_url } = this.musicDetaill
+      let { bg_url } = this.musicDetail
       if (bg_url) {
         let name = bg_url.split('/')
         return [{ name: name[name.length - 1], url: bg_url }]
@@ -165,7 +165,7 @@ export default {
     },
 
     musicFileList() {
-      let { song_url } = this.musicDetaill
+      let { song_url } = this.musicDetail
       if (song_url) {
         let name = song_url.split('/')
         return [{ name: name[name.length - 1], url: song_url }]
@@ -177,7 +177,6 @@ export default {
 
   created(){
     this.handleMuiscList()
-    console.log(baseURL)
   },
 
   methods:{
@@ -212,15 +211,18 @@ export default {
     },
 
     // 编辑列表信息
-    handleMuiscEdit(index){
+    async handleMuiscEdit(id){
       this.isDialog = true
-      this.musicDetaill = this.musicList[index]
+      let param = { id };
+      let result = await getMusicDetail(param)
+      if(!result.data.code) return this.$notify.error({ title: '失败', message: '获取音乐详情失败' })
+      this.musicDetail = result.data.data[0]
     },
 
     // 关闭弹窗
     handelCloseDialog(){
-      this.musicDetaill = {};
-      this.$refs.musicDetaill.resetFields();
+      this.musicDetail = {};
+      this.$refs.musicDetail.resetFields();
     },
 
     // 上传的时候
@@ -257,22 +259,22 @@ export default {
     handleAvatarSuccess(res, file) {
       if(!res.code) return this.$notify.error({ title: '失败', message: res.msg });
       this.$notify({ title: '成功', message: res.msg, type: 'success' });
-      this.musicDetaill.bg_url = res.data
+      this.musicDetail.bg_url = res.data
     },
 
     handleAvatarDelete(){
-      this.musicDetaill.bg_url = ''
+      this.musicDetail.bg_url = ''
     },
     
     handleMusicDelete(){
-      this.musicDetaill.song_url = ''
+      this.musicDetail.song_url = ''
     },
     
     // 上传mp3
     handleMusicSuccess(res, file){
       if(!res.code) return this.$notify.error({ title: '失败', message: res.msg });
       this.$notify({ title: '成功', message: res.msg, type: 'success' });
-      this.musicDetaill.song_url = res.data
+      this.musicDetail.song_url = res.data
     },
 
    // 删除表格
@@ -292,16 +294,14 @@ export default {
       })
     },
 
-    handleSubmitMusic(musicDetaill){
-      this.$refs[musicDetaill].validate(async(valid) => {
+    handleSubmitMusic(musicDetail){
+      this.$refs[musicDetail].validate(async(valid) => {
         if(!valid) return console.log('error submit!!');
-        // console.log(this.musicDetaill)
-        // return
         let result
-        if(this.musicDetaill.id){
-          result = await editMusic(this.musicDetaill)
+        if(this.musicDetail.id){
+          result = await editMusic(this.musicDetail)
         }else{
-          result = await addMusic(this.musicDetaill)
+          result = await addMusic(this.musicDetail)
         }
         if(!result.data.code)return this.$notify.error({title: '失败', message: result.data.msg})
         this.$notify({title: '成功', message: result.data.msg, type:'success'})

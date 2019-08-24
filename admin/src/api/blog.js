@@ -81,6 +81,15 @@ export const getMusicList = (data) => {
   })
 }
 
+// 音乐列表
+export const getMusicDetail = (data) => {
+  return axios.request({
+    url: '/api/blog/validate/musicDetail',
+    method: 'post',
+    data
+  })
+}
+
 // 删除音乐
 export const deleteMusic = (data) => {
   return axios.request({
