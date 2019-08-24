@@ -34,7 +34,6 @@
             v-loading.fullscreen.lock="fullscreenLoading"
             class="login-btn"
             @click="submit('btn',$event)"
-            @click="submit"
           >登录</el-button>
         </form>
       </div>
