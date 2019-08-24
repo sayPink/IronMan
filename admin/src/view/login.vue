@@ -25,7 +25,7 @@
               id="pwd"
               placeholder="密码"
               maxlength="30"
-              clearable
+              @keyup.native="submit('input',$event)"
             ></el-input>
             <span class="error-tip" v-show="pwdError">{{pwdErrorTip}}</span>
           </p>
@@ -33,6 +33,7 @@
             type="primary"
             v-loading.fullscreen.lock="fullscreenLoading"
             class="login-btn"
+            @click="submit('btn',$event)"
             @click="submit"
           >登录</el-button>
         </form>
@@ -70,41 +71,41 @@ export default {
 
   methods: {
     // ...mapMutations(["EDIT_TRANSITION"]),
-
-    submit() {
-      if (this.loginAccount === "") {
-        this.accErrorTip = "账号不能为空";
-        this.pwdError = true;
-      }
-      if (this.loginPassword === "") {
-        this.pwdErrorTip = "密码不能为空";
-        this.accError = true;
-      }
-      if (this.pwdError || this.accError) {
-        return false;
-      }
-      if (this.stopDbClick) {
-        this.stopDbClick = false;
-        // let param = {
-        //   username: "superman",
-        //   password: hexMd5.hex_md5(String("123456")).toUpperCase()
-        // };
-        let param = {
-          username: this.loginAccount,
-          password: this.loginPassword
-        };
-        login(param).then(res => {
-            this.stopDbClick = true;
-            if (!res.data.code) return this.$notify.error({ title: '失败', message: res.msg });
-            this.publicMethod.setCookie("token", JSON.stringify(res.data.data));
-            // this.$message.success("登录成功");
-            this.$notify({ title: '成功', message: '登录成功', type: 'success' });
-            this.$router.push({ path: "/home" });
-          }).catch(error => {
-            console.log(error);
-            this.stopDbClick = true
-            this.$notify.error({ title: '失败', message: '登录失败' });
-          });
+    submit(val, event) {
+      if ((event.keyCode === 13 && val === 'input' && this.loginPassword !== '') || val === 'btn') {
+        if (this.loginAccount === "") {
+          this.accErrorTip = "账号不能为空";
+          this.pwdError = true;
+        }
+        if (this.loginPassword === "") {
+          this.pwdErrorTip = "密码不能为空";
+          this.accError = true;
+        }
+        if (this.pwdError || this.accError) {
+          return false;
+        }
+        if (this.stopDbClick) {
+          this.stopDbClick = false;
+          // let param = {
+          //   username: "superman",
+          //   password: hexMd5.hex_md5(String("123456")).toUpperCase()
+          // };
+          let param = {
+            username: this.loginAccount,
+            password: this.loginPassword
+          };
+          login(param).then(res => {
+              this.stopDbClick = true;
+              if (!res.data.code) return this.$notify.error({ title: '失败', message: res.data.msg });
+              this.publicMethod.setCookie("token", JSON.stringify(res.data.data));
+              this.$notify({ title: '成功', message: '登录成功', type: 'success' });
+              this.$router.push({ path: "/home" });
+            }).catch(error => {
+              console.log(error);
+              this.stopDbClick = true
+              this.$notify.error({ title: '失败', message: '登录失败' });
+            });
+        }
       }
     }
   }
