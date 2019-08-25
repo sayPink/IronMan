@@ -1,0 +1,221 @@
+
+###所有用户(ok)
+
+post http://localhost:3006/api/user/validate/getUserAll
+Content-Type: application/json
+
+{
+    "search":"",
+    "page_num":"1",
+    "page_size":"2"
+}
+
+
+### 用户注册(ok)
+post http://localhost:3006/api/user/register
+Content-Type: application/json
+
+{
+    "username":"654321",
+    "password":"123456"
+}
+
+### 用户登录(ok)
+post http://localhost:3006/api/user/login
+Content-Type: application/json
+
+{
+    "username":"SuperMan",
+    "password":"654321"
+}
+
+
+### 验证token
+post http://localhost:3006/api/user/getUserInfo
+Content-Type: application/json
+
+{
+    "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6dHJ1ZSwibmFtZSI6MSwiaWF0IjoxNTY1NjgwNjE1LCJleHAiOjE1NjU3NjcwMTV9.ahpx34rwvgD2AipgbGDLJwCqN86TK4VaQZX6RaZ5ULQ"
+}
+
+
+###  修改密码(ok)
+post http://localhost:3006/api/user/validate/editPassword
+Content-Type: application/json
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6dHJ1ZSwibmFtZSI6MSwiaWF0IjoxNTY1NzY4NDMzLCJleHAiOjE1NjU4NTQ4MzN9.P2ClyiIyJ18J978nYcc9P9LifORkE7R_0qYj4-ekdYQ
+
+{
+    "id":"1",
+    "password":"123456",
+    "new_password":"123456"
+}
+
+
+###  修改用户信息(ok)
+post http://localhost:3006/api/user/validate/editUserInfo
+Content-Type: application/json
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6dHJ1ZSwibmFtZSI6MSwiaWF0IjoxNTY1NzY3ODYwLCJleHAiOjE1NjU4NTQyNjB9.fDi-ztPQFzSBSCuR1TjxuTLJ7PdW2railBQ9T9UgvoM
+
+{
+    "id":"1",
+    "sex_id":"0",
+    "status":"0",
+    "portrait":"",
+    "contact_phone":"13729992702"
+}
+
+### 删除用户(ok)
+post http://localhost:3006/api/user/deleteUserInfoAll
+Content-Type: application/json
+
+{
+    "id":"10,11"
+}
+
+
+###################### (博客列表)
+post http://localhost:3006/api/blog/getBlogList
+Content-Type: application/json
+
+{
+    "search":"",
+    "page_num":"1",
+    "page_size":""
+}
+
+### 博客详情(ok)
+post http://localhost:3006/api/blog/getBlogDetail
+Content-Type: application/json
+
+{
+    "id":"5"
+}
+
+### 博客点赞(ok)
+post http://localhost:3006/api/blog/getBlogLike
+Content-Type: application/json
+
+{
+    "id":"1"
+}
+
+### 博客点击量(ok)
+post http://localhost:3006/api/blog/getBlogHits
+Content-Type: application/json
+
+{
+    "id":"1"
+}
+
+### 博客标题(ok)
+post http://localhost:3006/api/blog/getBlogClassNameList
+Content-Type: application/json
+
+
+### 编辑博客class(ok)
+post http://localhost:3006/api/blog/validate/editBlogClass
+Content-Type: application/json
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6dHJ1ZSwibmFtZSI6MSwiaWF0IjoxNTY1NzY4Njk2LCJleHAiOjE1NjU4NTUwOTZ9.6wWCpsf35yWHDtnqKExZf-bQBj8GqPsVLXzPk7HHAg8
+
+{
+  "id":"1",
+  "class_name":"node"
+}
+
+### 新增博客clss(ok)
+post http://localhost:3006/api/blog/validate/addBlogClass
+Content-Type: application/json
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6dHJ1ZSwibmFtZSI6MSwiaWF0IjoxNTY1NzY4Njk2LCJleHAiOjE1NjU4NTUwOTZ9.6wWCpsf35yWHDtnqKExZf-bQBj8GqPsVLXzPk7HHAg8
+
+{
+  "class_name":"1"
+}
+
+### 删除博客tag(ok)
+post http://localhost:3006/api/blog/validate/deleteBlogClass
+Content-Type: application/json
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6dHJ1ZSwibmFtZSI6MSwiaWF0IjoxNTY1NzY4Njk2LCJleHAiOjE1NjU4NTUwOTZ9.6wWCpsf35yWHDtnqKExZf-bQBj8GqPsVLXzPk7HHAg8
+
+{
+  "id":"12"
+}
+
+
+### 博客tag(ok)
+post http://localhost:3006/api/blog/getBlogTagList
+Content-Type: application/json
+
+### 编辑博客tag(ok)
+post http://localhost:3006/api/blog/validate/editBlogTag
+Content-Type: application/json
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6dHJ1ZSwibmFtZSI6MSwiaWF0IjoxNTY1NzY4NDMzLCJleHAiOjE1NjU4NTQ4MzN9.P2ClyiIyJ18J978nYcc9P9LifORkE7R_0qYj4-ekdYQ
+
+{
+  "id":"1",
+  "tag_name":"node"
+}
+
+### 删除博客tag(ok)
+post http://localhost:3006/api/blog/validate/deleteBlogTag
+Content-Type: application/json
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6dHJ1ZSwibmFtZSI6MSwiaWF0IjoxNTY1NzY4NDMzLCJleHAiOjE1NjU4NTQ4MzN9.P2ClyiIyJ18J978nYcc9P9LifORkE7R_0qYj4-ekdYQ
+
+{
+  "id":"1"
+}
+
+### 新增博客tag(ok)
+post http://localhost:3006/api/blog/validate/addBlogTag
+Content-Type: application/json
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6dHJ1ZSwibmFtZSI6MSwiaWF0IjoxNTY1NzY4NDMzLCJleHAiOjE1NjU4NTQ4MzN9.P2ClyiIyJ18J978nYcc9P9LifORkE7R_0qYj4-ekdYQ
+
+{
+  "tag_name":"1"
+}
+
+### 音乐列表(ok)
+post http://localhost:3006/api/blog/getMusicList
+Content-Type: application/json
+
+{
+  "page_num": "1",
+  "page_size": "10"
+}
+
+### 删除音乐(ok)
+post http://localhost:3006/api/blog/validate/deleteMusic
+Content-Type: application/json
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6dHJ1ZSwibmFtZSI6MSwiaWF0IjoxNTY1ODY1MzI3LCJleHAiOjE1NjU5NTE3Mjd9.B4eHILKZWYsq7JxfdiCwkQ9xdFd9M48hlPtyvuIVcFU
+
+{
+  "id": "1"
+}
+
+### 添加音乐(ok)
+post http://localhost:3006/api/blog/validate/addMusic
+Content-Type: application/json
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6dHJ1ZSwibmFtZSI6MSwiaWF0IjoxNTY1ODY1MzI3LCJleHAiOjE1NjU5NTE3Mjd9.B4eHILKZWYsq7JxfdiCwkQ9xdFd9M48hlPtyvuIVcFU
+
+{
+  "song_name":"",
+  "source":"", 
+  "singer":"", 
+  "song_url":"", 
+  "bg_url":"", 
+  "describe":"" 
+}
+
+### 编辑音乐(ok)
+post http://localhost:3006/api/blog/validate/editMusic
+Content-Type: application/json
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6dHJ1ZSwibmFtZSI6MSwiaWF0IjoxNTY1ODY1MzI3LCJleHAiOjE1NjU5NTE3Mjd9.B4eHILKZWYsq7JxfdiCwkQ9xdFd9M48hlPtyvuIVcFU
+
+{
+  "id":"20",
+  "song_name":"测试203",
+  "source":"游民星空", 
+  "singer":"测试203", 
+  "song_url":"upload_a7d5245e79d68a3f78460ee247df4f64_confession.mp3", 
+  "bg_url":"upload_1ac75c27051feae7e0656b31caab09da_gamersky_01origin_01_201932153AA7.jpg", 
+  "describe":"" 
+}
