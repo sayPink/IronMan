@@ -15,7 +15,7 @@
     "dayjs": "^1.8.15",
     "element-ui": "^2.5.4",
     "file-loader": "^1.1.11",
-    "mavon-editor": "^2.7.5",
+    "mavon-editor": "^2.8.2",
     "mockjs": "^1.0.1-beta3",
     "url-loader": "^0.5.9",
     "vue": "^2.5.2",
